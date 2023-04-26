@@ -1,0 +1,52 @@
+name: Main tests
+
+on: push
+
+jobs:
+  container-job:
+    runs-on: ubuntu-latest
+    container: node:16.15.0
+    services:
+      redis:
+        image: redis:6.0.10
+      mysql:
+        image: mysql:5.7.33
+        env:
+          MYSQL_DATABASE: "erpsystem"
+          MYSQL_ROOT_PASSWORD: "root"
+          MYSQL_USER: "erpsystem"
+          MYSQL_PASSWORD: "erpsystem"
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            ~/.cache
+            **/node_modules
+            **/package-lock.json
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+      - name: Run server tests
+        working-directory: server
+        run: |
+          npm install
+          cp .env.github-actions .env.test
+          NODE_ENV=test npm run db-migrate
+          npm run test
+      - name: Prepare environment
+        run: |
+          apt update
+          apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
+
+      - name: Run client tests
+        working-directory: client
+        run: |
+          npm install
+          cp .env.example .env.test
+          npm run test:e2e:pipeline

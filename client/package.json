@@ -1,0 +1,72 @@
+{
+  "name": "erpsystem",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test:e2e:pipeline": "cd ../server && NODE_ENV=test npm run db-reset && NODE_ENV=test node src/index.js & pid=$! && cd ../client && vue-cli-service test:e2e --headless --mode test && kill -9 $pid",
+    "test:e2e": "vue-cli-service test:e2e --mode test"
+  },
+  "dependencies": {
+    "@cypress/webpack-dev-server": "^1.8.4",
+    "@mdi/font": "^6.6.96",
+    "@sentry/integrations": "^7.0.0",
+    "@sentry/tracing": "^7.0.0",
+    "@sentry/vue": "^7.10.0",
+    "@vue/cli-plugin-e2e-cypress": "^5.0.4",
+    "@vue/composition-api": "^1.4.9",
+    "@vuelidate/core": "^2.0.0-alpha.35",
+    "@vuelidate/validators": "^2.0.0-alpha.27",
+    "axios": "^0.27.2",
+    "core-js": "^3.8.3",
+    "dayjs": "^1.11.2",
+    "material-design-icons-iconfont": "^6.6.0",
+    "vue": "^2.6.14",
+    "vue-demi": "^0.12.1",
+    "vue-notification": "^1.3.20",
+    "vue-router": "^3.5.3",
+    "vuelidate": "^0.7.6",
+    "vuetify": "^2.6.4",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/eslint-parser": "^7.18.9",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "^5.0.8",
+    "cypress": "^9.6.1",
+    "eslint": "^8.21.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-vue": "^9.3.0",
+    "faker": "^5.5.3",
+    "prettier": "^2.7.1",
+    "sass": "^1.54.4",
+    "sass-loader": "^12.6.0",
+    "vue-cli-plugin-vuetify": "^2.5.1",
+    "vue-template-compiler": "~2.6.14",
+    "vuetify-loader": "~1.7.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended",
+      "plugin:cypress/recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

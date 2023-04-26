@@ -1,0 +1,11 @@
+const path = require('path');
+const { db } = require('./src/config');
+
+global.di = require('./src/di');
+
+module.exports = {
+    url: db.url + '?ssl=true',
+    'models-path': path.resolve(__dirname, 'src', 'models'),
+    'seeders-path': path.resolve(__dirname, 'src', 'seeders'),
+    'migrations-path': path.resolve(__dirname, 'src', 'migrations'),
+};

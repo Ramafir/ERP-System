@@ -1,0 +1,49 @@
+services:
+    controllers.vacations.index:
+        class: ../../controllers/vacations/IndexController
+        arguments: ['@repositories.vacation']
+    controllers.vacations.delete:
+        class: ../../controllers/vacations/DeleteController
+        arguments:
+            [
+                '@repositories.vacation',
+                '@repositories.user',
+                '@services.calculateVacationDaysOnUser',
+                '%http-status-codes'
+            ]
+    controllers.vacations.show:
+        class: ../../controllers/vacations/ShowController
+        arguments: ['@repositories.vacation', '%http-status-codes']
+    controllers.vacations.store:
+        class: ../../controllers/vacations/StoreController
+        arguments:
+            [
+                '@repositories.vacation',
+                '@repositories.user',
+                '@services.workingDaysCalculator',
+                '@services.calculateVacationDaysOnUser',
+                '%dayjs',
+                '%http-status-codes'
+            ]
+    controllers.vacations.update:
+        class: ../../controllers/vacations/UpdateController
+        arguments:
+            [
+                '@repositories.vacation',
+                '@repositories.user',
+                '@services.workingDaysCalculator',
+                '@services.calculateVacationDaysOnUser',
+                '%dayjs',
+                '%http-status-codes'
+            ]
+    controllers.vacations.confirm:
+        class: ../../controllers/vacations/ConfirmController
+        arguments:
+            [
+                '@repositories.vacation',
+                '@repositories.user',
+                '@services.workingDaysCalculator',
+                '@services.calculateVacationDaysOnUser',
+                '%dayjs',
+                '%http-status-codes'
+            ]

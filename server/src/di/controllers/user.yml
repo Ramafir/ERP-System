@@ -1,0 +1,22 @@
+services:
+    controllers.users.index:
+        class: ../../controllers/users/IndexController
+        arguments: ['@repositories.user', '@cache']
+    controllers.users.delete:
+        class: ../../controllers/users/DeleteController
+        arguments: ['@repositories.user', '%http-status-codes', '@cache']
+    controllers.users.show:
+        class: ../../controllers/users/ShowController
+        arguments: ['@repositories.user', '%http-status-codes']
+    controllers.users.store:
+        class: ../../controllers/users/StoreController
+        arguments:
+            [
+                '@repositories.user',
+                '@repositories.role',
+                '%http-status-codes',
+                '@cache'
+            ]
+    controllers.users.update:
+        class: ../../controllers/users/UpdateController
+        arguments: ['@repositories.user', '%http-status-codes', '@cache']

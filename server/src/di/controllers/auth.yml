@@ -1,0 +1,6 @@
+services:
+    controllers.auth.login:
+        class: ../../controllers/auth/LoginController
+        arguments: ['@repositories.user']
+    controllers.auth.logout:
+        class: ../../controllers/auth/LogoutController

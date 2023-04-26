@@ -1,0 +1,33 @@
+services:
+    controllers.contracts.index:
+        class: ../../controllers/contracts/IndexController
+        arguments: ['@repositories.contract']
+    controllers.contracts.delete:
+        class: ../../controllers/contracts/DeleteController
+        arguments:
+            [
+                '@repositories.contract',
+                '@repositories.user',
+                '%http-status-codes'
+            ]
+    controllers.contracts.show:
+        class: ../../controllers/contracts/ShowController
+        arguments: ['@repositories.contract', '%http-status-codes']
+    controllers.contracts.store:
+        class: ../../controllers/contracts/StoreController
+        arguments:
+            [
+                '@repositories.contract',
+                '@repositories.user',
+                '%dayjs',
+                '%http-status-codes'
+            ]
+    controllers.contracts.update:
+        class: ../../controllers/contracts/UpdateController
+        arguments:
+            [
+                '@repositories.contract',
+                '@repositories.user',
+                '%dayjs',
+                '%http-status-codes'
+            ]

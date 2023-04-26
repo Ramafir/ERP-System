@@ -1,0 +1,17 @@
+services:
+    services.calculateVacationDaysOnUser:
+        class: ../services/CalculateVacationDaysOnUser
+    services.workingDaysCalculator:
+        class: ../services/WorkingDaysCalculator
+        arguments: ['%dayjs']
+    services.sequelize:
+        factory:
+            class: ../services/SequelizeFactory
+            method: 'create'
+    services.redisClient:
+        factory:
+            class: ../services/RedisClientFactory
+            method: 'create'
+    cache:
+        class: ../services/Cache
+        arguments: ['@services.redisClient']
